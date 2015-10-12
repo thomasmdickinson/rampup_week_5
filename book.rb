@@ -5,7 +5,17 @@
 # Book Titles in English obey some strange capitalization rules. For example, "and" is lowercase in "War and Peace".
 
 class Book
+  attr_reader :title
 
+  def title=(value)
+    self.title = title_case(value.to_s)
+  end
+
+  private
+
+  def title_case(value)
+    
+  end
 end
 
 
