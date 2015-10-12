@@ -7,6 +7,10 @@
 class Book
   attr_reader :title
 
+  @@conjunctions = %w{and but or nor for so yet}
+  @@articles = %w{a an the}
+  @@prepositions = %w{about above across against along among around at before behind below beneath beside between beyond by down during except for from in inside into like near of off on since to toward through under until up upon with within}
+
   def title=(value)
     self.title = title_case(value.to_s)
   end
