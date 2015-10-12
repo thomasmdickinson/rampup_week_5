@@ -1,3 +1,5 @@
+require 'rspec'
+
 ## Credit to: testfirst.org/learnruby
 
 ## Book Titles
@@ -12,13 +14,17 @@ class Book
   @@prepositions = %w{about above across against along among around at before behind below beneath beside between beyond by down during except for from in inside into like near of off on since to toward through under until up upon with within}
 
   def title=(value)
-    self.title = title_case(value.to_s)
+    @title = title_case(value.to_s)
   end
 
   private
 
   def title_case(value)
-    
+    value
+  end
+
+  def something
+    "I am private too"
   end
 end
 
