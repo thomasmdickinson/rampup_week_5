@@ -2,6 +2,8 @@ require 'yaml'
 require 'rspec'
 
 class Person
+  attr_reader :attributes
+
   def initialize(attributes)
     @attributes = attributes
   end
@@ -16,7 +18,7 @@ class Person
 end
 
 class GuessWhoGame
-  NUM_CHANCES = 5
+  NUM_CHANCES = 3
   @@people = YAML::load(File.read 'people.yml').map{ |p| Person.new(p) }
 
   attr_accessor :num_guesses, :person
@@ -25,18 +27,45 @@ class GuessWhoGame
     @num_guesses = 0
     @people_left = @@people.dup
     @person = @people_left.sample
+    while play
+    end
+  end
+
+  def play
     print_summary
+
+    (attribute, value) = ask_for_guess
+    filter_people_left(attribute, value)
+
+    print_summary
+
+    if @people_left.count == 1
+      puts "YAY!  YOU WIN!"
+    else
+      @num_guesses += 1
+      if @num_guesses >= NUM_CHANCES
+        puts "Sorry, better luck next time."
+        return false
+      end
+    end
+    return true
+  end
+
+  def ask_for_guess
+    puts "What attribute would you like to guess about? (#{@people_left.first.attributes.keys.join(', ')})"
+    key = gets
+    puts "What value will you guess?"
+    value = gets
+    return key, value
   end
 
   def print_summary
     @people_left.each { |p| puts p }
   end
 
-  def guess(key, value)
-    
-    @num_guesses += 1
+  def filter_people_left(key, value)
+    @people_left.select!{ |k,v| k == key && v == value }
   end
-
 end
 
 
