@@ -10,21 +10,21 @@ end
 
 class Celsius < TemperatureValue
   def to_fahrenheit
-
+    (self.value)*9/5+32
   end
 
   def to_celsius
-
+    self.value
   end
 end
 
 class Fahrenheit < TemperatureValue
   def to_fahrenheit
-
+    self.value
   end
 
   def to_celsius
-
+    (self.value-32)*5/9
   end
 end
 
