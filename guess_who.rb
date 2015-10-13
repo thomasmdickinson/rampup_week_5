@@ -64,7 +64,7 @@ class GuessWhoGame
   end
 
   def filter_people_left(key, value)
-    @people_left.select!{ |k,v| k == key && v == value }
+    @people_left.select!{ |p| p.has_attribute?(key, value) }
   end
 end
 
