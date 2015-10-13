@@ -20,7 +20,26 @@ class Book
   private
 
   def title_case(value)
-    value
+
+    # defines the words that should not be capitalized
+    little_words = @@conjunctions + @@articles + @@prepositions
+
+    # creates an array
+    words = value.split
+
+    # capitalizes every word so long as it's not a little word
+    words.each do |word|
+      if not little_words.include?(word)
+        word.capitalize!
+      end
+    end
+
+    # makes sure the first word is capitalized, even if it got by the previous
+    # block on account of being a little world
+    words.first.capitalize!
+
+    # joins the array back into a string
+    words.join(" ")
   end
 
   def something
